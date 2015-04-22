@@ -23,7 +23,7 @@ class Homestead
 
     # Copy The Bash Aliases
     config.vm.provision "shell" do |s|
-      s.inline = "cp /vagrant/aliases /home/vagrant/.bash_aliases"
+      s.inline = "cp /home/vagrant/Code/aliases /home/vagrant/.bash_aliases"
       s.inline = "sudo apt-get update"
       s.inline = "sudo composer self-update"
     end
@@ -37,10 +37,10 @@ class Homestead
     settings["sites"].each do |site|
       config.vm.provision "shell" do |s|
           if (site.has_key?("hhvm") && site["hhvm"])
-            s.inline = "bash /vagrant/scripts/serve-hhvm.sh $1 $2"
+            s.inline = "bash /home/vagrant/Code/scripts/serve-hhvm.sh $1 $2"
             s.args = [site["map"], site["to"]]
           else
-            s.inline = "bash /vagrant/scripts/serve.sh $1 $2"
+            s.inline = "bash /home/vagrant/Code/scripts/serve.sh $1 $2"
             s.args = [site["map"], site["to"]]
           end
       end
